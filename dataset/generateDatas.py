@@ -11,6 +11,7 @@ from quickdraw import QuickDrawDataGroup
 
 
 def generateData(key, value):
+    print('Generating data pictures ... ')
     # Generate datas from quickdraw libraries
     keys = QuickDrawDataGroup(key, max_drawings=value)
     # Integer i for sequential file name
@@ -19,10 +20,13 @@ def generateData(key, value):
         # Saving pictures
         element.image.save(key + str(i) + '.png')
         i += 1
+    print('Pictures have been generated !')
 
 
 """
 Generate data using the below form 
 generateData('anvil', 100) --> # Representing generate 100 anvil pictures
 """
+
+generateData('anvil', 10)
 
