@@ -23,6 +23,6 @@ def generateData(key, value):
 
 """
 Generate data using the below form 
-generateData('anvil', 100) --> # Representing generate 100 anvil pictures a
+generateData('anvil', 100) --> # Representing generate 100 anvil pictures
 """
 
