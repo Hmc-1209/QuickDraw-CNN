@@ -1,4 +1,4 @@
-# QuickDraw-Sketches-CNN
+# QuickDraw-CNN
 This is a project that uses CNN to determine what are the quick draw represent.
 We used the dataset 'Quick, Draw! The Data' for training and testing our model.
 
