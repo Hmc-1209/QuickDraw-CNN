@@ -13,12 +13,21 @@ So, here is why : Since this is a dataset from the Google game 'Quick, Draw!', i
 used in games like Gartic.io, and we can simply draw and let computers to helped us bring out labels, doesn't that sounds great? 
 That's why we want to give it a try.
 
-**How can I execute it ?**   
+**What is contained in this project ?**   
 There are multiple files in this project, and here are the list :
 * main.py
+  - For training datas, execute this code after customization it with your own data.
 * dataset (folder)
   - generateDatas.py
     - Inside this file, it allows you to generate the amount and type of datas from quickdraw,  
       it would automatically generate pictures in this folder.
 * testing.py 
   - You can completely ignore this as it is just for testing stuffs.
+
+**How can I execute it ?**   
+  <!-- ... -->
+
+---
+**References**   
+* https://quickdraw.readthedocs.io/en/latest/  
+* https://quickdraw.withgoogle.com/data
