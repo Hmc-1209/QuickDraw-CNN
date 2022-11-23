@@ -1,4 +1,6 @@
-from quickdraw import QuickDrawData
+from quickdraw import QuickDrawDataGroup
+import cv2
+import matplotlib.pyplot as plt
 
 # df = pd.read_json('../archive/finger.ndjson', lines=True)
 # for d in df['drawing']:
@@ -11,7 +13,14 @@ from quickdraw import QuickDrawData
 # plt.show()
 
 
-qd = QuickDrawData()
-anvil = qd.get_drawing("anvil")
-print(anvil)
-anvil.image.show()
+anvils = QuickDrawDataGroup("anvil", max_drawings=2)
+i = 0
+for anvil in anvils.drawings:
+    print(anvil)
+    anvil.image.save('anvil'+str(i)+'.png')
+    i += 1
+
+pic = cv2.imread('anvil0.png')
+print(pic)
+plt.imshow(pic)
+plt.show()
