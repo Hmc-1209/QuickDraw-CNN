@@ -1,2 +1,4 @@
 *.png
 dataset/.quickdrawcache
+testing.py
+*.npy

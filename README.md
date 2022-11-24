@@ -21,9 +21,6 @@ There are multiple files in this project, and here are the list :
   - generateDatas.py
     - Inside this file, it allows you to generate the amount and type of datas from quickdraw,  
       it would automatically generate pictures in this folder.
-* testing.py 
-  - You can completely ignore this as it is just for testing stuffs.
-
 **How can I execute it ?**   
   <!-- ... -->
 
