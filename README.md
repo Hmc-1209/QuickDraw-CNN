@@ -25,22 +25,22 @@ These files are the type of images we train in this project. Put them in ' datas
 
 
 
->## **How can I execute it ?**    
->There are multiple files you could execute :
->* `modelTraining.py`
->  - For training datas, execute this code (or do it after customization it with your own data).  
->  
-> 
->* `xxx.py`
->  - xxx
-> 
-> 
->* `dataset (folder)`
->  - multiple `.npy` files
->    - Put the files you've downloaded previously here.
->    - By default, this is the best practice to get your data, but you could also give it a try to save local images using 'generateDatas.py'.
->  - `generateDatas.py`
->    - Inside this file, it allows you to generate the amount and multiple types of images from quickdraw,  
+## **How can I execute it ?**    
+There are multiple files you could execute :
+* `modelTraining.py`
+  - For training datas, execute this code (or do it after customization it with your own data).  
+  
+ 
+* `xxx.py`
+  - xxx
+ 
+ 
+* `dataset (folder)`
+  - multiple `.npy` files
+    - Put the files you've downloaded previously here.
+    - By default, this is the best practice to get your data, but you could also give it a try to save local images using 'generateDatas.py'.
+  - `generateDatas.py`
+    - Inside this file, it allows you to generate the amount and multiple types of images from quickdraw,  
        it would automatically generate them in this folder. (Note that generating great quantity of images might take a lot of time !!)
 
 
