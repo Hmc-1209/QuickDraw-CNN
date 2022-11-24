@@ -11,18 +11,20 @@ Here is the link for the dataset : https://quickdraw.withgoogle.com/data
 You won't accept it if I say *'There is no exact motivates for doing this, we're doing this just because it looks fun :D'.*   
 So, here is why : Since this is a dataset from the Google game 'Quick, Draw!', it's essential for most drawing games. Imagine if this could be
 used in games like Gartic.io, and we can simply draw and let computers to helped us bring out labels, doesn't that sounds great? 
-That's why we want to give it a try.
+That's why we want to give it a try.  
 
-**What is contained in this project ?**   
+**What exactly can this project do ?**  
+This project trains a model to visualize (28*28) pictures. By default, the datasets are from .npy files given in this link : https://console.cloud.google.com/storage/browser/quickdraw_dataset/full/numpy_bitmap
+
+**How can I execute it ?**    
 There are multiple files in this project, and here are the list :
-* main.py
+* modelTraining.py
   - For training datas, execute this code after customization it with your own data.
 * dataset (folder)
   - generateDatas.py
     - Inside this file, it allows you to generate the amount and type of datas from quickdraw,  
-      it would automatically generate pictures in this folder.
-**How can I execute it ?**   
-  <!-- ... -->
+      it would automatically generate pictures in this folder.  
+
 
 ---
 **References**   

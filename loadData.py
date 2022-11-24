@@ -1,0 +1,20 @@
+"""
+    This is a code that been used by training and testing models
+"""
+
+import numpy as np
+
+
+# Split the list
+def split_list(ls, n):
+    temp = []
+    for index in range(0, len(ls), n):
+        temp.append(ls[index: index+n])
+    return temp
+
+def load(key):
+    rawDatas = np.load('./dataset/full_numpy_bitmap_'+key+'.npy')
+    data = []
+    for rawData in rawDatas:
+        data.append(split_list(rawData, 28))
+    return data
