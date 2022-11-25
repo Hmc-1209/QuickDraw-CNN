@@ -17,7 +17,7 @@ def split_list(ls, n):
 def load(key):
     rawDatas = np.load('./dataset/full_numpy_bitmap_'+key+'.npy')
     data = []
-    for rawData in rawDatas[:5000]:
+    for rawData in rawDatas[:10000]:
         data.append(split_list(rawData, 28))
 
     return data
