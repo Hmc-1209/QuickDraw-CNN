@@ -7,10 +7,12 @@ keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'swo
 
 # Getting datas
 dataset = []
+print('Loading datas ... ')
 for key in keys:
     dataset += ld.load(key)
+print('Loading complete !')
 
-# print(len(dataset))
-# for i in range(0, 50000, 5100):
-#     plt.imshow(dataset[i])
-#     plt.show()
+print(len(dataset))
+for i in range(0, 50000, 5100):
+    plt.imshow(dataset[i])
+    plt.show()

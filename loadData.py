@@ -9,7 +9,8 @@ import numpy as np
 def split_list(ls, n):
     temp = []
     for index in range(0, len(ls), n):
-        temp.append(ls[index: index+n])
+        temp.append(list(ls[index: index+n]))
+        # print(ls[index: index+n])
     return temp
 
 # Function for loading data
@@ -18,4 +19,5 @@ def load(key):
     data = []
     for rawData in rawDatas[:5000]:
         data.append(split_list(rawData, 28))
+
     return data
