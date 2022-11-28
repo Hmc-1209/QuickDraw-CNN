@@ -3,10 +3,14 @@
 """
 
 import os
+<<<<<<< HEAD
 import urllib.error
 import urllib.request
 
 import numpy as np
+=======
+import random
+>>>>>>> ed6b10d5f231066edcd69e3540d91e7996cabaae
 
 # Datasets
 keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
@@ -18,7 +22,7 @@ keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
 def split_list(ls, n):
     temp = []
     for index in range(0, len(ls), n):
-        temp.append(list(ls[index: index + n]))
+        temp.append(np.array(ls[index: index + n]))
         # print(ls[index: index+n])
     return temp
 
@@ -93,4 +97,22 @@ def load_datas():
     print('Loading complete !')
     print('There are ' + str(types) + ' types of images loaded :' + '\n' + str(keys))
     print('Train datas : ' + str(len(train_data)), 'Test datas : ' + str(len(test_data)) + '\n')
+<<<<<<< HEAD
+=======
+
+    # Shuffle datas and labels
+    packTrain = list(zip(train_data, train_label))
+    random.shuffle(packTrain)
+    packTest = list(zip(test_data, test_label))
+    random.shuffle(packTest)
+    train_data, train_label = zip(*packTrain)
+    test_data, test_label = zip(*packTest)
+
+    # Convert lists into ndarray
+    train_data = np.array(train_data)
+    test_data = np.array(test_data)
+    train_label = np.array(train_label)
+    test_label = np.array(test_label)
+
+>>>>>>> ed6b10d5f231066edcd69e3540d91e7996cabaae
     return train_data, train_label, test_data, test_label
