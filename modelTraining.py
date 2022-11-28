@@ -11,7 +11,7 @@ import loadData as lD
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Getting datasg
+# Getting dataset
 train_data, train_label, test_data, test_label = lD.load_datas()
 
 

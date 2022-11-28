@@ -3,14 +3,11 @@
 """
 
 import os
-<<<<<<< HEAD
 import urllib.error
 import urllib.request
 
 import numpy as np
-=======
 import random
->>>>>>> ed6b10d5f231066edcd69e3540d91e7996cabaae
 
 # Datasets
 keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
@@ -97,16 +94,14 @@ def load_datas():
     print('Loading complete !')
     print('There are ' + str(types) + ' types of images loaded :' + '\n' + str(keys))
     print('Train datas : ' + str(len(train_data)), 'Test datas : ' + str(len(test_data)) + '\n')
-<<<<<<< HEAD
-=======
 
     # Shuffle datas and labels
-    packTrain = list(zip(train_data, train_label))
-    random.shuffle(packTrain)
-    packTest = list(zip(test_data, test_label))
-    random.shuffle(packTest)
-    train_data, train_label = zip(*packTrain)
-    test_data, test_label = zip(*packTest)
+    pack_train = list(zip(train_data, train_label))
+    random.shuffle(pack_train)
+    pack_test = list(zip(test_data, test_label))
+    random.shuffle(pack_test)
+    train_data, train_label = zip(*pack_train)
+    test_data, test_label = zip(*pack_test)
 
     # Convert lists into ndarray
     train_data = np.array(train_data)
@@ -114,5 +109,4 @@ def load_datas():
     train_label = np.array(train_label)
     test_label = np.array(test_label)
 
->>>>>>> ed6b10d5f231066edcd69e3540d91e7996cabaae
     return train_data, train_label, test_data, test_label
