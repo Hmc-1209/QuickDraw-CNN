@@ -23,8 +23,8 @@ def split_list(ls, n):
 def download(keys):
     url = "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap/"
 
-    def download_progress(a, b, c):
-        print('\rDownloading: %5.1f%%' % (a * b * 100.0 / c), end="")
+    def download_progress(count, blocksize, totalsize):
+        print('\rDownloading: %5.1f%%' % (count * blocksize * 100.0 / totalsize), end="")
 
     for key in keys:
         path = './dataset/full_numpy_bitmap_' + key + '.npy'
