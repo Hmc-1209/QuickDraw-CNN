@@ -11,7 +11,7 @@ from quickdraw import QuickDrawDataGroup
 from PIL import Image
 
 
-def generateData(key, value):
+def generate_data(key, value):
     print('------------------------------\nGenerating data pictures ... ')
     # Generate datas from quickdraw libraries
     keys = QuickDrawDataGroup(key, max_drawings=value)
@@ -31,5 +31,5 @@ def generateData(key, value):
 
 """
 Generate data using the below form 
-generateData('anvil', 100) --> # Representing generate 100 anvil pictures
+generate_data('anvil', 100) --> # Representing generate 100 anvil pictures
 """
