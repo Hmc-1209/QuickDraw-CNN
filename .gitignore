@@ -2,3 +2,4 @@
 dataset/.quickdrawcache
 testing.py
 *.npy
+.DS_Store

@@ -2,12 +2,16 @@
     This is a code that been used by training and testing models
 """
 
-import numpy as np
-from urllib.request import urlretrieve
 import os
+import urllib.error
+import urllib.request
+
+import numpy as np
 
 # Datasets
 keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
+
+
 # keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'wine glass']
 
 # Split the list
@@ -17,6 +21,7 @@ def split_list(ls, n):
         temp.append(list(ls[index: index + n]))
         # print(ls[index: index+n])
     return temp
+
 
 # Downloading datas required
 def download():
@@ -37,27 +42,28 @@ def download():
         key_url = url + k_url + '.npy'
 
         try:
-            urlretrieve(key_url, path, reporthook=download_progress)
+            urllib.request.urlretrieve(key_url, path, reporthook=download_progress)
             print('')
-        except:
+        except urllib.error.HTTPError:
             print("No such file")
 
 
 # Function for loading data
 def load(key):
-    rawDatas = []
+    raw_datas = []
     try:
-        rawDatas = np.load('./dataset/full_numpy_bitmap_' + key + '.npy')
-    except:
+        raw_datas = np.load('./dataset/full_numpy_bitmap_' + key + '.npy')
+    except FileNotFoundError:
         print('Failed to get "full_numpy_bitmap_' + key + '.npy" in dataset folder.')
 
     data = []
-    for rawData in rawDatas[:10000]:
+    for rawData in raw_datas[:10000]:
         data.append(split_list(rawData, 28))
     return data
 
+
 # Function for returning datas
-def loadDatas():
+def load_datas():
     # Datas
     train_data = []
     train_label = []
