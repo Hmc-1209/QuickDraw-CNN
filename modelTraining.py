@@ -11,8 +11,12 @@ import loadData as lD
 import numpy as np
 import matplotlib.pyplot as plt
 
+# Datasets
+keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
+# keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'wine glass']
+
 # Getting dataset
-train_data, train_label, test_data, test_label = lD.load_datas()
+train_data, train_label, test_data, test_label = lD.load_datas(keys)
 
 
 # Data Preprocessing

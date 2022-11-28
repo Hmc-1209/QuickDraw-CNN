@@ -9,11 +9,6 @@ import urllib.request
 import numpy as np
 import random
 
-# Datasets
-keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
-
-
-# keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'wine glass']
 
 # Split the list
 def split_list(ls, n):
@@ -25,7 +20,7 @@ def split_list(ls, n):
 
 
 # Downloading datas required
-def download():
+def download(keys):
     url = "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap/"
 
     def download_progress(a, b, c):
@@ -64,7 +59,7 @@ def load(key):
 
 
 # Function for returning datas
-def load_datas():
+def load_datas(keys):
     # Datas
     train_data = []
     train_label = []
@@ -73,7 +68,7 @@ def load_datas():
     # n types of images for one-hot encoding
     types = 0
     print('Loading datas ... ')
-    download()
+    download(keys)
     for key in keys:
         datas = load(key)
         # Split the data into train and test data
