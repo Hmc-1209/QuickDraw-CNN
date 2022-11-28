@@ -16,16 +16,16 @@ def split_list(ls, n):
     temp = []
     for index in range(0, len(ls), n):
         temp.append(list(ls[index: index+n]))
-        # print(ls[index: index+n])
     return temp
 
 # Function for loading data
 def load(key):
     # If the dataset does not exist, catch the error
+    rawDatas = []
     try:
-        rawDatas = np.load('./dataset/full_numpy_bitmap_'+key+'.npy')
+        rawDatas = np.load('./dataset/full_numpy_bitmap_' + key + '.npy')
     except:
-        print('Failed to get full_numpy_bitmap_' + key + '.npy in dataset folder.')
+        print('Failed to get "full_numpy_bitmap_' + key + '.npy" in dataset folder.')
 
     data = []
     for rawData in rawDatas[:10000]:
@@ -58,6 +58,12 @@ def loadDatas():
             test_label.append(types)
         datas.clear()
         types += 1
+
+    # Checking datas existence
+    if len(train_data) != 8000 * len(keys):
+        print('Please check out the .npy files properly')
+        quit(1)
+
     print('Loading complete !')
     print('There are ' + str(types) + ' types of images loaded :')
     print(keys)
