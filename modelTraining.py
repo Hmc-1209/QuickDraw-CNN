@@ -1,29 +1,20 @@
+"""
+    This is the code for training model
+
+"""
+
+from keras import Sequential
+from keras.utils import to_categorical
 import loadData as ld
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Datasets
-keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
-# keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'wine glass']
-
 # Getting datas
-train_data = []
-train_label = []
-test_data = []
-test_label = []
-print('Loading datas ... ')
-for key in keys:
-    # Calling load() from loadData.py
-    datas = ld.load(key)
-    # Split the data into train and test data
-    train_data += datas[:8000]
-    test_data += datas[8000:]
-    # Generate labels for train and test data
-    for i in range(8000):
-        train_label.append(key)
-    for i in range(2000):
-        test_label.append(key)
-    datas.clear()
-print('Loading complete !')
+train_data, train_label, test_data, test_label = ld.loadDatas()
 
+# Data Preprocessing
+train_label = to_categorical(train_label)
+test_label = to_categorical(test_label)
 
+# Creating models
+model = Sequential()
