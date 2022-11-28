@@ -24,29 +24,35 @@ def download(keys):
     url = "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap/"
 
     def download_progress(count, blocksize, totalsize):
-        print('\rDownloading: %5.1f%%' % (count * blocksize * 100.0 / totalsize), end="")
+        # print('\rDownloading: %5.1f%%' % (count * blocksize * 100.0 / totalsize), end="")
+        print(f'\r{icon[count%4]}{count * blocksize * 100.0 / totalsize:5.1f}%', end="")
 
     for key in keys:
         path = './dataset/full_numpy_bitmap_' + key + '.npy'
         # check whether file exist
         if os.path.exists(path):
-            # print('%s file exists!' % key)
+            print('%s npy file exists!' % key)
             continue
 
-        print('Downloading %s npy file' % key)
-        k_url = key.replace('_', '%20')
-        key_url = url + k_url + '.npy'
+        print('Downloading %s.npy' % key)
+        filename = key.replace('_', '%20') + '.npy'
+        key_url = url + filename
 
         try:
+            icon = '⋮⋰⋯⋱'
             urllib.request.urlretrieve(key_url, path, reporthook=download_progress)
             print('')
         except urllib.error.HTTPError:
-            print("No such file")
+            print("Failed to get %s npy file." % key)
+        except KeyboardInterrupt:
+            print("\nDownload suspend.")
+            os.remove(path)
+
+    print('Download Finished.')
 
 
 # Function for loading data
 def load(key):
-    raw_datas = []
     try:
         raw_datas = np.load('./dataset/full_numpy_bitmap_' + key + '.npy')
     except FileNotFoundError:
