@@ -10,6 +10,7 @@
 from quickdraw import QuickDrawDataGroup
 from PIL import Image
 
+
 def generateData(key, value):
     print('------------------------------\nGenerating data pictures ... ')
     # Generate datas from quickdraw libraries
@@ -32,4 +33,3 @@ def generateData(key, value):
 Generate data using the below form 
 generateData('anvil', 100) --> # Representing generate 100 anvil pictures
 """
-
