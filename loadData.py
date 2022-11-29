@@ -45,6 +45,7 @@ def load(key):
         raw_datas = np.load('./dataset/full_numpy_bitmap_' + key + '.npy')
     except FileNotFoundError:
         print('Failed to get "full_numpy_bitmap_' + key + '.npy" in dataset folder.')
+        return
 
     return raw_datas[:10000].reshape(10000, 28, 28)
 
@@ -66,10 +67,17 @@ def load_datas(keys):
     for key in keys:
         datas = load(key)
 
-        # Split the data into train and test data
         start_train = types * 8000
         start_test = types * 2000
 
+        # Checking datas existence
+        if datas is None:
+            np.delete(train_data, np.s_[start_train:start_train + 8000], axis=0)
+            np.delete(test_data, np.s_[start_test:start_test + 2000], axis=0)
+            del keys[types]
+            continue
+
+        # Split the data into train and test data
         train_data[start_train:start_train + 8000] = datas[:8000]
         test_data[start_test:start_test + 2000] = datas[8000:]
 
@@ -77,11 +85,6 @@ def load_datas(keys):
         test_label[start_test:start_test + 2000] = types
 
         types += 1
-
-    # Checking datas existence
-    if len(train_data) != 8000 * len(keys):
-        print('Please check out the .npy files properly')
-        raise SystemExit(1)
 
     print('Loading complete !')
     print('There are ' + str(types) + ' types of images loaded :' + '\n' + str(keys))

@@ -1,11 +1,10 @@
 """
     This is the code for training model
-
 """
-import random
 
 from keras import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.regularizers import l2
 from keras.utils import to_categorical
 import loadData as lD
 import numpy as np
@@ -25,16 +24,27 @@ test_label = to_categorical(test_label)
 
 # Creating models
 model = Sequential()
-model.add(Conv2D(32, kernel_size=(3, 3), padding='same', input_shape=(28, 28, 1), activation='relu'))
+model.add(Conv2D(16, kernel_size=(7, 7), padding='same', input_shape=(28, 28, 1), activation='relu'))
+model.add(Conv2D(16, kernel_size=(7, 7), padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.2))
+
+model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
+model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.2))
+
 model.add(Conv2D(32, kernel_size=(3, 3), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Conv2D(64, kernel_size=(3, 3), padding='same', activation='relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.2))
 model.add(Flatten())
-model.add(Dense(256, activation="relu"))
-model.add(Dense(5, activation="relu"))
+
+model.add(Dense(128, activation="relu", kernel_regularizer=l2(0.01)))
+model.add(Dense(64, activation="relu", kernel_regularizer=l2(0.01)))
+model.add(Dense(5, activation="softmax"))
+
 model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
 
 history = model.fit(train_data, train_label, validation_split=0.2, epochs=20, batch_size=200)
 loss, acc = model.evaluate(train_data, train_label)

@@ -2,7 +2,6 @@
     To generate datas from quickdraw database, simply call generateData
     function and pass the keywords and values in, then the code will
     automatically generate (28*28) pictures in this folder.
-
     quickdrawcache is a cache when calling quickdraw library.
     You don't need to do anything about it.
 """
