@@ -4,15 +4,15 @@
 
 from keras import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from keras.regularizers import l2
+from keras.regularizers import l2, l1
 from keras.utils import to_categorical
 import loadData as lD
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Datasets
-keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
-# keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'wine glass']
+# keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
+keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'watermelon']
 
 # Getting dataset
 train_data, train_label, test_data, test_label = lD.load_datas(keys)
@@ -24,23 +24,28 @@ test_label = to_categorical(test_label)
 
 # Creating models
 model = Sequential()
-model.add(Conv2D(16, kernel_size=(7, 7), padding='same', input_shape=(28, 28, 1), activation='relu'))
-model.add(Conv2D(16, kernel_size=(7, 7), padding='same', activation='relu'))
+model.add(Conv2D(16, kernel_size=(9, 9), padding='same', input_shape=(28, 28, 1), activation='relu'))
+model.add(Conv2D(16, kernel_size=(9, 9), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.2))
 
 model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
 model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.2))
+model.add(Dropout(0.3))
+
+model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
+model.add(Conv2D(32, kernel_size=(5, 5), activation='relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+model.add(Dropout(0.4))
 
 model.add(Conv2D(32, kernel_size=(3, 3), padding='same', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.5))
 model.add(Flatten())
 
 model.add(Dense(128, activation="relu", kernel_regularizer=l2(0.01)))
 model.add(Dense(64, activation="relu", kernel_regularizer=l2(0.01)))
-model.add(Dense(5, activation="softmax"))
+model.add(Dense(10, activation="softmax"))
 
 model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
