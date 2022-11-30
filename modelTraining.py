@@ -17,8 +17,9 @@ keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'swo
 # Getting dataset
 train_data, train_label, test_data, test_label = lD.load_datas(keys)
 
-
 # Data Preprocessing
+# train_data = train_data.astype('float32')/255
+# test_data = test_data.astype('float32')/255
 train_label = to_categorical(train_label)
 test_label = to_categorical(test_label)
 

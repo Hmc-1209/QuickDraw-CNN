@@ -29,7 +29,7 @@ def download(keys):
         try:
             icon = '⋮⋰⋯⋱'
             urllib.request.urlretrieve(key_url, path, reporthook=download_progress)
-            print('')
+            print('\r⋮100.0%')
         except urllib.error.HTTPError:
             print("Failed to get %s npy file." % key)
         except KeyboardInterrupt:
