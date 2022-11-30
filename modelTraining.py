@@ -4,34 +4,32 @@
 
 from keras import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
-from keras.regularizers import l2, l1
+from keras.regularizers import l2
 from keras.utils import to_categorical
 import loadData as lD
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Datasets
-# keys = ['cat', 'diamond', 'eye', 'ladder', 'moon']
 keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'watermelon']
 
 # Getting dataset
 train_data, train_label, test_data, test_label = lD.load_datas(keys)
 
+
 # Data Preprocessing
-# train_data = train_data.astype('float32')/255
-# test_data = test_data.astype('float32')/255
 train_label = to_categorical(train_label)
 test_label = to_categorical(test_label)
 
 # Creating models
 model = Sequential()
-model.add(Conv2D(16, kernel_size=(9, 9), padding='same', input_shape=(28, 28, 1), activation='relu'))
-model.add(Conv2D(16, kernel_size=(9, 9), padding='same', activation='relu'))
+model.add(Conv2D(16, kernel_size=(7, 7), padding='same', input_shape=(28, 28, 1), activation='relu'))
+model.add(Conv2D(16, kernel_size=(7, 7), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.2))
 
-model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
-model.add(Conv2D(32, kernel_size=(5, 5), padding='same', activation='relu'))
+model.add(Conv2D(32, kernel_size=(7, 7), padding='same', activation='relu'))
+model.add(Conv2D(32, kernel_size=(7, 7), padding='same', activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.3))
 
@@ -68,3 +66,25 @@ plt.xlabel("Epochs")
 plt.ylabel("Acc")
 plt.legend()
 plt.show()
+
+for i in range(5):
+    # -------------- Random image ----------------
+    index = np.random.randint(0, len(test_data))
+    digit = test_data[index]
+    test_predict = test_data[index].reshape(1, 28, 28, 1)
+
+    plt.figure()
+    plt.subplot(1, 2, 1)
+    plt.title("Example of Image:" + str(keys[np.argmax(test_label[index])]))
+    plt.imshow(digit, cmap="gray")
+
+    plt.subplot(1, 2, 2)
+    print("Predicting ... ")
+    # Probabilities for all result
+    probs = model.predict(test_predict, batch_size=1)
+    plt.title("Probabilities of Each Digit Class")
+    # Trans into bars
+    plt.bar(np.arange(10), probs.reshape(10), align="center")
+    plt.xticks(np.arange(10), np.arange(10).astype(str))
+    plt.show()
+
