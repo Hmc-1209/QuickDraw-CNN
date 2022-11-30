@@ -5,11 +5,27 @@ from math import ceil
 def relu(inputs):
     return np.maximum(0, inputs)
 
+
 def sigmoid(inputs):
     return 1 / (1 + np.exp(inputs))
 
+
 def softmax(inputs):
-    return np.exp(inputs)/sum(np.exp(inputs))
+    return np.exp(inputs) / sum(np.exp(inputs))
+
+
+def activate(inputs, activation=None):
+    if activation == 'relu':
+        return relu(inputs)
+    elif activation == 'sigmoid':
+        return sigmoid(inputs)
+    elif activation == 'softmax':
+        return softmax(inputs)
+    elif activation is None:
+        return inputs
+    else:
+        print('No such activation function!')
+        raise SystemExit(1)
 
 
 class Model:
@@ -70,15 +86,7 @@ class Conv2D:
                     x_v = x[h:h + self.filter_h, w: w + self.filter_w]
                     f_map[f_map_h, f_map_w, f] = np.matmul(x_v, mask)
 
-        if self.activation == 'relu':
-            f_map = relu(f_map)
-        elif self.activation == 'sigmoid':
-            f_map = sigmoid(f_map)
-        elif self.activation == 'softmax':
-            f_map = softmax(f_map)
-        else:
-            print('No such activation function!')
-            raise SystemExit(1)
+        f_map = activate(f_map, self.activation)
 
         return f_map
 
