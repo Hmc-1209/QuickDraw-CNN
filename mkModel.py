@@ -79,6 +79,7 @@ class Conv2D:
 
         # 維持原輸入尺寸
         if self.padding == 'same':
+
             x = np.pad(x, (1, 1), mode='constant')
 
         out_height, out_width, _ = self.get_output_shape()

@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'watermelon']
 
 # Getting dataset
-train_data, train_label, test_data, test_label = lD.load_datas(keys)
+train_data, train_label, test_data, test_label = lD.load_datas(keys, 20000)
 
 
 # Data Preprocessing

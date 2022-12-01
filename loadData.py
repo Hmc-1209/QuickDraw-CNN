@@ -40,14 +40,14 @@ def download(keys):
 
 
 # Function for loading data
-def load(key):
+def load(key, amount):
     try:
         raw_datas = np.load('./dataset/full_numpy_bitmap_' + key + '.npy')
     except FileNotFoundError:
         print('Failed to get "full_numpy_bitmap_' + key + '.npy" in dataset folder.')
         return
 
-    return raw_datas[:10000].reshape(10000, 28, 28)
+    return raw_datas[:amount].reshape(amount, 28, 28)
 
 
 # Function for returning datas
@@ -55,8 +55,8 @@ def load_datas(keys, amount, test_split=0.2):
     # n types of images for one-hot encoding
     types = 0
 
-    test_num = amount * test_split
-    train_num = amount - test_num
+    test_num = int(amount * test_split)
+    train_num = int(amount - test_num)
 
     # Datas
     train_data = np.empty((train_num * len(keys), 28, 28))
@@ -68,7 +68,7 @@ def load_datas(keys, amount, test_split=0.2):
     download(keys)
 
     for key in keys:
-        datas = load(key)
+        datas = load(key, amount)
 
         start_train = types * train_num
         start_test = types * test_num
@@ -82,7 +82,7 @@ def load_datas(keys, amount, test_split=0.2):
 
         # Split the data into train and test data
         train_data[start_train:start_train + train_num] = datas[:train_num]
-        test_data[start_test:start_test + test_num] = datas[test_num:]
+        test_data[start_test:start_test + test_num] = datas[train_num:]
 
         train_label[start_train:start_train + train_num] = types
         test_label[start_test:start_test + test_num] = types
