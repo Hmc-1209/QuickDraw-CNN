@@ -89,4 +89,3 @@ for i in range(5):
     plt.bar(np.arange(10), probs.reshape(10), align="center")
     plt.xticks(np.arange(10), np.arange(10).astype(str))
     plt.show()
-
