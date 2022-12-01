@@ -51,15 +51,18 @@ def load(key):
 
 
 # Function for returning datas
-def load_datas(keys):
+def load_datas(keys, amount, test_split=0.2):
     # n types of images for one-hot encoding
     types = 0
 
+    test_num = amount * test_split
+    train_num = amount - test_num
+
     # Datas
-    train_data = np.empty((8000 * len(keys), 28, 28))
-    train_label = np.empty(8000 * len(keys))
-    test_data = np.empty((2000 * len(keys), 28, 28))
-    test_label = np.empty(2000 * len(keys))
+    train_data = np.empty((train_num * len(keys), 28, 28))
+    train_label = np.empty(train_num * len(keys))
+    test_data = np.empty((test_num * len(keys), 28, 28))
+    test_label = np.empty(test_num * len(keys))
 
     print('Loading datas ... ')
     download(keys)
@@ -67,22 +70,22 @@ def load_datas(keys):
     for key in keys:
         datas = load(key)
 
-        start_train = types * 8000
-        start_test = types * 2000
+        start_train = types * train_num
+        start_test = types * test_num
 
         # Checking datas existence
         if datas is None:
-            np.delete(train_data, np.s_[start_train:start_train + 8000], axis=0)
-            np.delete(test_data, np.s_[start_test:start_test + 2000], axis=0)
+            np.delete(train_data, np.s_[start_train:start_train + train_num], axis=0)
+            np.delete(test_data, np.s_[start_test:start_test + test_num], axis=0)
             del keys[types]
             continue
 
         # Split the data into train and test data
-        train_data[start_train:start_train + 8000] = datas[:8000]
-        test_data[start_test:start_test + 2000] = datas[8000:]
+        train_data[start_train:start_train + train_num] = datas[:train_num]
+        test_data[start_test:start_test + test_num] = datas[test_num:]
 
-        train_label[start_train:start_train + 8000] = types
-        test_label[start_test:start_test + 2000] = types
+        train_label[start_train:start_train + train_num] = types
+        test_label[start_test:start_test + test_num] = types
 
         types += 1
 
