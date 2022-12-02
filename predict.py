@@ -88,7 +88,12 @@ def main():
                                 draw_points.append([-1])
 
                             is_drawing = True
-                            draw_points.append([round(int(hand_local[4][0])), round(int(hand_local[4][1]))])
+                            px = round(hand_local[4][0])
+                            py = round(hand_local[4][1])
+                            if (505>px and px>195) and (355>py and py>45):
+                                draw_points.append([round(int(hand_local[4][0])), round(int(hand_local[4][1]))])
+                            else:
+                                draw_points.append([-1])
                             cv2.putText(img, str(round(hand_local[4][0])) + ', ' + str(round(hand_local[4][1])),
                                         (int(hand_local[4][0]) - 70, int(hand_local[4][1]) + 70),
                                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0))

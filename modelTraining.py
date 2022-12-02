@@ -72,23 +72,3 @@ plt.ylabel("Acc")
 plt.legend()
 plt.show()
 
-# for i in range(5):
-#     # -------------- Random image ----------------
-#     index = np.random.randint(0, len(test_data))
-#     digit = test_data[index]
-#     test_predict = test_data[index].reshape(1, 28, 28, 1)
-#
-#     plt.figure()
-#     plt.subplot(1, 2, 1)
-#     plt.title("Example of Image:" + str(keys[np.argmax(test_label[index])]))
-#     plt.imshow(digit, cmap="gray")
-#
-#     plt.subplot(1, 2, 2)
-#     print("Predicting ... ")
-#     # Probabilities for all result
-#     probs = model.predict(test_predict, batch_size=1)
-#     plt.title("Probabilities of Each Digit Class")
-#     # Trans into bars
-#     plt.bar(np.arange(10), probs.reshape(10), align="center")
-#     plt.xticks(np.arange(10), np.arange(10).astype(str))
-#     plt.show()
