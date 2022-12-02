@@ -14,7 +14,17 @@ def download(keys):
     url = "https://storage.googleapis.com/quickdraw_dataset/full/numpy_bitmap/"
 
     def download_progress(count, blocksize, totalsize):
-        print(f'\r{icon[count % 4]}{count * blocksize * 100.0 / totalsize:5.1f}%', end="")
+        now = count * blocksize / totalsize
+        total_blocks = 50
+
+        if now >= 1.0:
+            print(
+                f'\r[{"█" * total_blocks}] {100}%', end='')  # 輸出不換行的內容
+        else:
+            plus_block = int(now * total_blocks)
+            minus_block = int(total_blocks - plus_block)
+            percentage = round(now * 100, 2)
+            print(f'\r[{plus_block * "█"}{minus_block * " "}] {percentage}%', end='')  # 輸出不換行的內容
 
     for key in keys:
         path = './dataset/full_numpy_bitmap_' + key + '.npy'
@@ -29,7 +39,7 @@ def download(keys):
         try:
             icon = '⋮⋰⋯⋱'
             urllib.request.urlretrieve(key_url, path, reporthook=download_progress)
-            print('\r⋮100.0%')
+            print('')
         except urllib.error.HTTPError:
             print("Failed to get %s npy file." % key)
         except KeyboardInterrupt:
@@ -91,7 +101,7 @@ def load_datas(keys, amount, test_split=0.2):
 
     print('Loading complete !')
     print('There are ' + str(types) + ' types of images loaded :' + '\n' + str(keys))
-    print('Train datas : ' + str(len(train_data)), 'Test datas : ' + str(len(test_data)) + '\n')
+    print(f'Train datas : {str(len(train_data))} | Test datas : {str(len(test_data))}', end='\n\n')
 
     # Shuffle datas and labels
     shuffle_ix = np.random.permutation(np.arange(len(train_data)))

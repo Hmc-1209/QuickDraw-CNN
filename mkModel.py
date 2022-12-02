@@ -48,14 +48,9 @@ class Conv2D:
         self.filter_w = kernel_size[1]
         self.strides = strides
         self.padding = padding
-        # self.input_shape = kwargs['input_shape']
         self.activation = activation
         self.weights = kwargs['weight']
-        self.masks = self.weights if self.weights \
-            else np.random.randn(filters, kernel_size[0], kernel_size[1]) * np.sqrt(2 / kernel_size[0])
-
-        # if self.input_shape:
-        #     self.in_height, self.in_width, self.in_depth = self.input_shape
+        self.masks = None
 
     def check_data(self):
         return
@@ -81,6 +76,9 @@ class Conv2D:
     def get_output(self, x: np.ndarray):
         batch_size, in_height, in_width, in_depth = x.shape
 
+        self.masks = self.weights if self.weights else \
+            np.random.randn(self.filter_h, self.filter_w, in_depth, self.filters) * np.sqrt(2 / self.filter_h)
+
         # 維持原輸入尺寸
         if self.padding == 'same':
             pad_h = (in_height - self.filter_h) / 2
@@ -92,7 +90,7 @@ class Conv2D:
 
         for batch in range(batch_size):
             for f in range(self.filters):
-                mask = self.masks[f]
+                mask = self.masks[:, :, :, f].reshape(self.filter_h, self.filter_w)
                 f_map_h = 0
                 f_map_w = 0
                 for h in range(0, out_height, self.strides[0]):
