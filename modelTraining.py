@@ -15,7 +15,7 @@ keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'swo
 
 # Getting dataset
 train_data, train_label, test_data, test_label = lD.load_datas(keys, 20000)
-
+print(train_data[0])
 
 # Data Preprocessing
 train_label = to_categorical(train_label)
@@ -52,11 +52,14 @@ model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 
-history = model.fit(train_data, train_label, validation_split=0.2, epochs=100, batch_size=200)
+history = model.fit(train_data, train_label, validation_split=0.2, epochs=20, batch_size=200)
 loss, acc = model.evaluate(train_data, train_label)
 print("訓練資料集準確度：{:.2f}".format(acc))
 loss, acc = model.evaluate(test_data, test_label)
 print("測試資料集準確度：{:.2f}".format(acc))
+
+print("Saving Model as QuickDrawCNN.h5 ...")
+model.save("QuickDrawCNN.h5")
 
 loss = history.history["accuracy"]
 epochs = range(1, len(loss)+1)
@@ -69,23 +72,23 @@ plt.ylabel("Acc")
 plt.legend()
 plt.show()
 
-for i in range(5):
-    # -------------- Random image ----------------
-    index = np.random.randint(0, len(test_data))
-    digit = test_data[index]
-    test_predict = test_data[index].reshape(1, 28, 28, 1)
-
-    plt.figure()
-    plt.subplot(1, 2, 1)
-    plt.title("Example of Image:" + str(keys[np.argmax(test_label[index])]))
-    plt.imshow(digit, cmap="gray")
-
-    plt.subplot(1, 2, 2)
-    print("Predicting ... ")
-    # Probabilities for all result
-    probs = model.predict(test_predict, batch_size=1)
-    plt.title("Probabilities of Each Digit Class")
-    # Trans into bars
-    plt.bar(np.arange(10), probs.reshape(10), align="center")
-    plt.xticks(np.arange(10), np.arange(10).astype(str))
-    plt.show()
+# for i in range(5):
+#     # -------------- Random image ----------------
+#     index = np.random.randint(0, len(test_data))
+#     digit = test_data[index]
+#     test_predict = test_data[index].reshape(1, 28, 28, 1)
+#
+#     plt.figure()
+#     plt.subplot(1, 2, 1)
+#     plt.title("Example of Image:" + str(keys[np.argmax(test_label[index])]))
+#     plt.imshow(digit, cmap="gray")
+#
+#     plt.subplot(1, 2, 2)
+#     print("Predicting ... ")
+#     # Probabilities for all result
+#     probs = model.predict(test_predict, batch_size=1)
+#     plt.title("Probabilities of Each Digit Class")
+#     # Trans into bars
+#     plt.bar(np.arange(10), probs.reshape(10), align="center")
+#     plt.xticks(np.arange(10), np.arange(10).astype(str))
+#     plt.show()
