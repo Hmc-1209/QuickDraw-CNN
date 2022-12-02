@@ -2,16 +2,16 @@
     This is the code for training model
 """
 
+import matplotlib.pyplot as plt
 from keras import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras.regularizers import l2
 from keras.utils import to_categorical
 import loadData as lD
-import numpy as np
-import matplotlib.pyplot as plt
+import keys
 
-# Datasets
-keys = ['cat', 'diamond', 'eye', 'ladder', 'moon', 'necklace', 'snowflake', 'sword', 'tornado', 'watermelon']
+
+keys = keys.keys()
 
 # Getting dataset
 train_data, train_label, test_data, test_label = lD.load_datas(keys, 20000)

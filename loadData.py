@@ -98,8 +98,4 @@ def load_datas(keys, amount, test_split=0.2):
     train_data = np.array(train_data)[shuffle_ix]
     train_label = np.array(train_label)[shuffle_ix]
 
-    shuffle_iy = np.random.permutation(np.arange(len(test_data)))
-    test_data = np.array(test_data)[shuffle_iy]
-    test_label = np.array(test_label)[shuffle_iy]
-
     return train_data, train_label, test_data, test_label
