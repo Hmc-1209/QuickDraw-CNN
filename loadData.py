@@ -5,9 +5,9 @@
 import os
 import urllib.error
 import urllib.request
-
+import ssl
 import numpy as np
-
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # Downloading datas required
 def download(keys):

@@ -32,4 +32,4 @@ def generate_data(key, value):
 Generate data using the below form 
 generate_data('anvil', 100) --> # Representing generate 100 anvil pictures
 """
-generate_data('sword', 5)
+generate_data('cat', 5)
