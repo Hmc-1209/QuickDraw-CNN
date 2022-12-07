@@ -7,7 +7,9 @@ import urllib.error
 import urllib.request
 import ssl
 import numpy as np
+
 ssl._create_default_https_context = ssl._create_unverified_context
+
 
 # Downloading datas required
 def download(keys):
@@ -37,7 +39,6 @@ def download(keys):
         key_url = url + filename
 
         try:
-            icon = '⋮⋰⋯⋱'
             urllib.request.urlretrieve(key_url, path, reporthook=download_progress)
             print('')
         except urllib.error.HTTPError:
