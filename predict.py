@@ -90,7 +90,7 @@ def main():
                             is_drawing = True
                             px = round(hand_local[4][0])
                             py = round(hand_local[4][1])
-                            if (505>px and px>195) and (355>py and py>45):
+                            if (505 > px > 195) and (355 > py > 45):
                                 draw_points.append([round(int(hand_local[4][0])), round(int(hand_local[4][1]))])
                             else:
                                 draw_points.append([-1])

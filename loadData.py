@@ -7,7 +7,9 @@ import urllib.error
 import urllib.request
 import ssl
 import numpy as np
+
 ssl._create_default_https_context = ssl._create_unverified_context
+
 
 # Downloading datas required
 def download(keys):
@@ -37,7 +39,6 @@ def download(keys):
         key_url = url + filename
 
         try:
-            icon = '⋮⋰⋯⋱'
             urllib.request.urlretrieve(key_url, path, reporthook=download_progress)
             print('')
         except urllib.error.HTTPError:
@@ -83,7 +84,7 @@ def load_datas(keys, amount, test_split=0.2):
         start_train = types * train_num
         start_test = types * test_num
 
-        # Checking datas existences
+        # Checking datas existence
         if datas is None:
             np.delete(train_data, np.s_[start_train:start_train + train_num], axis=0)
             np.delete(test_data, np.s_[start_test:start_test + test_num], axis=0)
