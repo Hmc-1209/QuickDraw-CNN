@@ -4,15 +4,6 @@ from math import ceil
 
 
 def activate(x, activation=None):
-    # def relu(x):
-    #     return np.maximum(0, x)
-    #
-    # def sigmoid(x):
-    #     return 1 / (1 + np.exp(x))
-    #
-    # def softmax(x):
-    #     return np.exp(x) / sum(np.exp(x))
-
     if activation == 'relu':
         return np.maximum(0, x)
     elif activation == 'sigmoid':
@@ -146,3 +137,19 @@ class MaxPooling2D:
                     f_map_h += 1
 
         return
+
+
+class Fatten:
+    def get_output(self, x):
+        batch_size, in_height, in_width, in_depth = x.shape
+
+        f_map = None
+        for batch in range(batch_size):
+            for h in range(in_height):
+                for w in range(in_width):
+                    if f_map is None:
+                        f_map = x[batch, h, w]
+                        continue
+                    f_map = np.concatenate((f_map, x[batch, h, w]))
+
+        return f_map.reshape(batch_size, in_height*in_width*in_depth)
