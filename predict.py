@@ -9,6 +9,7 @@ import keys
 keys = keys.keys()
 w = 700
 h = 400
+
 # Opening camera
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, w)
@@ -43,6 +44,7 @@ def predict(data):
     # Probabilities for all result
     probs = model.predict(predict_data, batch_size=1)
     plt.title("Probabilities for each type")
+
     # Trans into bars
     plt.bar(np.arange(10), probs.reshape(10), align="center")
     plt.xticks(np.arange(10), np.arange(10).astype(str))
@@ -74,12 +76,14 @@ def main():
                     for handLms in result.multi_hand_landmarks:
                         # Draw hands
                         mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS, handLmsStyle, handConStyle)
+
                         # Getting 21 points from mediapipe
                         hand_local = []
                         for i in range(21):  # Getting points
                             x_pos = handLms.landmark[i].x * img.shape[1]
                             y_pos = handLms.landmark[i].y * img.shape[0]
                             hand_local.append((x_pos, y_pos))
+
                         # If the dis of thumb tip and index tip less than 50, save the point at the moment
                         linear_distance = np.sqrt(np.square(hand_local[4][0] - hand_local[8][0]) + np.square(
                             hand_local[4][1] - hand_local[8][1]))
