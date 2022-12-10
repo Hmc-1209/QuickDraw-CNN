@@ -4,7 +4,7 @@
 
 import matplotlib.pyplot as plt
 from keras import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization
 from keras.regularizers import l2
 from keras.utils import to_categorical
 import loadData as lD
