@@ -2,7 +2,7 @@
     To generate datas from quickdraw database, simply call generateData
     function and pass the keywords and values in, then the code will
     automatically generate (28*28) pictures in this folder.
-    quickdrawcache is a cache when calling quickdraw library.
+    quickdraw cache is a cache when calling quickdraw library.
     You don't need to do anything about it.
 """
 
@@ -32,4 +32,4 @@ def generate_data(key, value):
 Generate data using the below form 
 generate_data('anvil', 100) --> # Representing generate 100 anvil pictures
 """
-generate_data('cat', 5)
+generate_data('eye', 10)
