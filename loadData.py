@@ -21,12 +21,12 @@ def download(keys):
 
         if now >= 1.0:
             print(
-                f'\r[{"█" * total_blocks}] {100}%', end='')  # 輸出不換行的內容
+                f'\r[{"█" * total_blocks}] {100}%', end='')
         else:
-            plus_block = int(now * total_blocks)
-            minus_block = int(total_blocks - plus_block)
+            block = int(now * total_blocks)
+            space = int(total_blocks - block)
             percentage = round(now * 100, 2)
-            print(f'\r[{plus_block * "█"}{minus_block * " "}] {percentage}%', end='')  # 輸出不換行的內容
+            print(f'\r[{block * "█"}{space * " "}] {percentage}%', end='')
 
     for key in keys:
         path = './dataset/full_numpy_bitmap_' + key + '.npy'
